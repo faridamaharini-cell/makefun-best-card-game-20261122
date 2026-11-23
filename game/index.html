@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Isles Duel — Clash of the Island Guardians</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="table">
+  <header id="topbar">
+    <div class="brand">🔥 EMBER ISLES DUEL ⚔️</div>
+    <div class="top-actions">
+      <span id="roundLabel" class="pill">ROUND 1</span>
+      <span id="scoreLabel" class="pill">SCORE 0</span>
+      <button id="muteBtn" class="mini-btn" type="button" title="Mute (M)">🔊 SOUND</button>
+      <button id="restartBtn" class="mini-btn" type="button" title="Restart (R)">↻ RESTART</button>
+    </div>
+  </header>
+
+  <section id="foeZone" class="zone">
+    <div class="fighter foe">
+      <div class="avatar foe-avatar">🌋</div>
+      <div class="fighter-info">
+        <div class="fighter-name">MORVAIN · Ashen Warden</div>
+        <div class="life-row">
+          <span class="life-label">LIFE</span>
+          <div class="life-bar"><div id="foeLifeFill" class="life-fill foe-fill"></div></div>
+          <span id="foeLifeText" class="life-text">30 / 30</span>
+        </div>
+        <div class="mana-row"><span class="mana-label">MANA</span><span id="foeManaText" class="mana-text">◆ 1</span><span id="foeDeckText" class="deck-text">DECK 19</span></div>
+      </div>
+      <div id="foeLastPlay" class="last-play">—</div>
+    </div>
+    <div id="foeHand" class="hand foe-hand" aria-label="Opponent hand"></div>
+  </section>
+
+  <section id="midZone">
+    <div id="battleLog" class="log" aria-live="polite"></div>
+    <div id="centerStage">
+      <div id="turnBanner" class="turn-banner">YOUR TURN</div>
+      <div id="clashLine" class="clash-line">Play a card to strike!</div>
+      <button id="endTurnBtn" class="end-btn" type="button">END TURN ⏎</button>
+    </div>
+    <div id="comboPanel" class="combo-panel">
+      <div class="combo-title">⚡ SUIT CYCLE</div>
+      <div class="combo-row"><span class="suit-chip flame">🔥 Flame</span> beats <span class="suit-chip leaf">🍃 Leaf</span></div>
+      <div class="combo-row"><span class="suit-chip leaf">🍃 Leaf</span> beats <span class="suit-chip tide">💧 Tide</span></div>
+      <div class="combo-row"><span class="suit-chip tide">💧 Tide</span> beats <span class="suit-chip flame">🔥 Flame</span></div>
+      <div class="combo-row"><span class="suit-chip stone">🪨 Stone</span> stands alone · no bonus, no weakness</div>
+      <div class="combo-note">Suit advantage: +2 power · Same-suit surge: +1 each</div>
+    </div>
+  </section>
+
+  <section id="youZone" class="zone">
+    <div id="youHand" class="hand you-hand" aria-label="Your hand"></div>
+    <div class="fighter you">
+      <div class="avatar you-avatar">🧝</div>
+      <div class="fighter-info">
+        <div class="fighter-name">KIRA · Ember Guardian — YOU</div>
+        <div class="life-row">
+          <span class="life-label">LIFE</span>
+          <div class="life-bar"><div id="youLifeFill" class="life-fill you-fill"></div></div>
+          <span id="youLifeText" class="life-text">30 / 30</span>
+        </div>
+        <div class="mana-row"><span class="mana-label">MANA</span><span id="youManaText" class="mana-text">◆ 1</span><span id="youDeckText" class="deck-text">DECK 19</span></div>
+      </div>
+      <div id="youLastPlay" class="last-play">—</div>
+    </div>
+  </section>
+
+  <p id="hintBar">Click a card (or press 1–5) to play it · <b>Space</b> ends your turn · <b>R</b> restarts</p>
+</div>
+
+<div id="titleScreen" class="overlay">
+  <div class="title-card">
+    <div class="title-kicker">A DUEL OF THE ISLAND GUARDIANS</div>
+    <h1>🔥 EMBER ISLES<br>DUEL ⚔️</h1>
+    <p class="title-sub">Outwit Morvain, the Ashen Warden, in a battle of elemental cards.<br>
+    Strike with Flame, Tide, Leaf and Stone — and mind the suit cycle.</p>
+    <div class="title-suits">
+      <span class="suit-chip flame">🔥 FLAME</span>
+      <span class="suit-chip tide">💧 TIDE</span>
+      <span class="suit-chip leaf">🍃 LEAF</span>
+      <span class="suit-chip stone">🪨 STONE</span>
+    </div>
+    <div class="title-rules">
+      <div>❤️ <b>30 Life</b> each — first to 0 loses</div>
+      <div>◆ <b>Mana</b> grows +1 every turn (max 10)</div>
+      <div>⚔️ <b>Power</b> is damage · suit advantage <b>+2</b> · same-suit surge <b>+1</b></div>
+      <div>🃏 Draw a card every turn · play as many as your mana allows</div>
+    </div>
+    <button id="startBtn" class="big-btn" type="button">▶ &nbsp;START THE DUEL</button>
+    <div class="title-foot">Keyboard: 1–5 play a card · Space ends turn · R restarts · M mutes</div>
+  </div>
+</div>
+
+<div id="endScreen" class="overlay hidden">
+  <div class="end-card">
+    <div id="endEmoji" class="end-emoji">🏆</div>
+    <h2 id="endTitle">VICTORY!</h2>
+    <p id="endSub" class="end-sub"></p>
+    <div id="endStats" class="end-stats"></div>
+    <button id="againBtn" class="big-btn" type="button">↻ &nbsp;PLAY AGAIN</button>
+    <div class="title-foot">Ember Isles Duel — an original card game</div>
+  </div>
+</div>
+
+<div id="floatLayer"></div>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
